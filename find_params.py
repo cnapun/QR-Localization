@@ -114,7 +114,7 @@ def main(input_file, pattern_file='Camera Localization/pattern.png'):
 
     centers, _ = match_center_order(pattern_centers, img_centers, pattern, img)
     euler_vec, tvec = calc_params(
-        pattern_centers / pattern_size * print_size, centers, mtx, True, imshape[::-1])
+        pattern_centers / pattern_size * print_size, centers, mtx, False, imshape[::-1])
     roll, pitch, yaw = euler_vec
     yaw = -yaw
 
