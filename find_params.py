@@ -125,7 +125,7 @@ def main(input_file, pattern_file='Camera Localization/pattern.png'):
 
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser() # could add argument to generate vis.html file from params.
     parser.add_argument(
         "-i", '--image', help="Location of input image", required=True)
     parser.add_argument("-p", '--pattern', help="Location of pattern image",

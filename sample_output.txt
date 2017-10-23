@@ -1,0 +1,53 @@
+IMG_6719.JPG
+Camera Angles:
+Roll: 43.2°, Pitch: 10.1°, Yaw: 29.9°
+Camera Position:
+(x,y,z) = (-159, 48, 891) mm
+
+IMG_6720.JPG
+Camera Angles:
+Roll: 34.0°, Pitch: 10.1°, Yaw: 83.7°
+Camera Position:
+(x,y,z) = (-128, 32, 959) mm
+
+IMG_6721.JPG
+Camera Angles:
+Roll: 35.3°, Pitch: 11.7°, Yaw: 135.2°
+Camera Position:
+(x,y,z) = (-102, 84, 955) mm
+
+IMG_6722.JPG
+Camera Angles:
+Roll: 32.5°, Pitch: 11.3°, Yaw: -179.9°
+Camera Position:
+(x,y,z) = (-113, 129, 953) mm
+
+IMG_6723.JPG
+Camera Angles:
+Roll: 33.0°, Pitch: 9.6°, Yaw: -133.8°
+Camera Position:
+(x,y,z) = (-175, 130, 942) mm
+
+IMG_6724.JPG
+Camera Angles:
+Roll: 31.6°, Pitch: 11.3°, Yaw: -94.4°
+Camera Position:
+(x,y,z) = (-223, 111, 938) mm
+
+IMG_6725.JPG
+Camera Angles:
+Roll: -0.1°, Pitch: 1.0°, Yaw: -9.3°
+Camera Position:
+(x,y,z) = (-165, 58, 587) mm
+
+IMG_6726.JPG
+Camera Angles:
+Roll: 0.4°, Pitch: 1.1°, Yaw: 10.1°
+Camera Position:
+(x,y,z) = (-185, 82, 787) mm
+
+IMG_6727.JPG
+Camera Angles:
+Roll: 0.6°, Pitch: 1.0°, Yaw: 33.8°
+Camera Position:
+(x,y,z) = (-190, 134, 1048) mm
