@@ -1,0 +1,87 @@
+<html>
+
+<head>
+    <title>My first three.js app</title>
+    <style>
+        body {
+            margin: 0;
+        }
+
+        canvas {
+            width: 100%;
+            height: 100%
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <select onchange="changeCamera(this.value)">
+            <option value="19">IMG_6719.JPG</option>
+            <option value="20">IMG_6720.JPG</option>
+            <option value="21">IMG_6721.JPG</option>
+            <option value="22">IMG_6722.JPG</option>
+            <option value="23">IMG_6723.JPG</option>
+            <option value="24">IMG_6724.JPG</option>
+            <option value="25">IMG_6725.JPG</option>
+            <option value="26">IMG_6726.JPG</option>
+            <option value="27">IMG_6727.JPG</option>
+        </select>
+    </div>
+    <script src="three.js"></script>
+    <script>
+        var imageParams = { "19": { "roll": 43.24246994668935, "pitch": 10.114338078811965, "yaw": 29.91103628647694, "tx": -159.00393676757812, "ty": 48.049251556396484, "tz": 890.8156127929688 }, "20": { "roll": 34.019425750244125, "pitch": 10.100661578926646, "yaw": 83.66074386976348, "tx": -128.27789306640625, "ty": 32.44399642944336, "tz": 959.2770385742188 }, "21": { "roll": 35.305455057064684, "pitch": 11.699828242897366, "yaw": 135.19545641550386, "tx": -102.27559661865234, "ty": 84.20897674560547, "tz": 955.44873046875 }, "22": { "roll": 32.53661828032672, "pitch": 11.285918234024722, "yaw": -179.9415281612382, "tx": -112.98165130615234, "ty": 129.40646362304688, "tz": 953.4816284179688 }, "23": { "roll": 32.98301833203169, "pitch": 9.566943298783873, "yaw": -133.77616537217574, "tx": -175.1977081298828, "ty": 129.72354125976562, "tz": 941.9784545898438 }, "24": { "roll": 31.56733256853796, "pitch": 11.258466989435535, "yaw": -94.38243545748634, "tx": -222.58428955078125, "ty": 111.0603256225586, "tz": 938.3611450195312 }, "25": { "roll": -0.09104102790886756, "pitch": 0.9547259576978515, "yaw": -9.273749722181268, "tx": -164.71466064453125, "ty": 58.147789001464844, "tz": 586.7769775390625 }, "26": { "roll": 0.3701895813452506, "pitch": 1.0597945848959984, "yaw": 10.115909050219253, "tx": -184.7316131591797, "ty": 81.68688201904297, "tz": 786.6896362304688 }, "27": { "roll": 0.590561873674073, "pitch": 0.995913473352586, "yaw": 33.81169172454919, "tx": -189.5132293701172, "ty": 133.80844116210938, "tz": 1048.3184814453125 } };
+        function changeCamera(id) {
+            var new_param = imageParams[id];
+            console.log(new_param);
+            camera.rotation.x = new_param.pitch * Math.pi / 180.0;
+            camera.rotation.y = new_param.roll * Math.pi / 180.0;
+            camera.rotation.z = new_param.yaw * Math.pi / 180.0;
+
+            camera.position.z = new_param.tz;
+            camera.position.y = new_param.ty;
+            camera.position.x = new_param.tx;
+            renderer.render(scene, camera);
+        };
+        var scene = new THREE.Scene();
+        var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        var roll = 0.57566;
+        var pitch = 0.16697;
+        var yaw = 2.33483;
+
+        camera.eulerOrder = 'ZXY';
+        camera.rotation.x = pitch;
+        camera.rotation.y = roll;
+        camera.rotation.z = -yaw;
+
+        camera.position.z = 713;
+        camera.position.y = 98;
+        camera.position.x = -133;
+
+
+        var renderer = new THREE.WebGLRenderer();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        document.body.appendChild(renderer.domElement);
+
+
+        var material;
+        var frameID;
+        var texture = THREE.ImageUtils.loadTexture("pattern.png");
+        material = new THREE.MeshBasicMaterial({
+            map: texture
+        });
+
+        var geometry = new THREE.PlaneGeometry(88, 88);
+        // var material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
+        var plane = new THREE.Mesh(geometry, material);
+        // plane.overdraw = true;
+
+        scene.add(plane);
+        
+        window.addEventListener('load', function(){
+            renderer.render(scene, camera);
+        })
+    </script>
+</body>
+
+</html>
