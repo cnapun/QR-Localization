@@ -20,5 +20,4 @@ Camera Position:
 * I could not determine the optimal camera matrix, as using `cv2.calibrateCamera` would output very inconsistent camera matrices. One thing to note is that the rotation vectors from using `calibrateCamera` seem to better reflect the yaw (and maybe roll) of the patterns, but the translation vectors and pitch do not, so I could use `calibrateCamera` only for those two components of rotation, and `solvePnP` for translation. I ended up using camera matrix values from a website I found, so they might not be very accurate.
 * My method of determining the QR code corners in the image will not scale to more complex patterns (due to the call of `itertools.permutations`). I used this because I found that the orientation of QR codes can be found from only using the 3 corners, but I couldn't capture the 3 corners without the fourth as well.
 * My code assumes the 8.8 cm measurement is for the size of the pattern, not the size of the entire `pattern.png`
-
-
+* I tried a simple SIFT knn matching, but it didn't seem to work as well

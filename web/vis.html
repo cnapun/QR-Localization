@@ -30,37 +30,27 @@
     </div>
     <script src="three.js"></script>
     <script>
-        var imageParams = { "19": { "roll": 43.24246994668935, "pitch": 10.114338078811965, "yaw": 29.91103628647694, "tx": -159.00393676757812, "ty": 48.049251556396484, "tz": 890.8156127929688 }, "20": { "roll": 34.019425750244125, "pitch": 10.100661578926646, "yaw": 83.66074386976348, "tx": -128.27789306640625, "ty": 32.44399642944336, "tz": 959.2770385742188 }, "21": { "roll": 35.305455057064684, "pitch": 11.699828242897366, "yaw": 135.19545641550386, "tx": -102.27559661865234, "ty": 84.20897674560547, "tz": 955.44873046875 }, "22": { "roll": 32.53661828032672, "pitch": 11.285918234024722, "yaw": -179.9415281612382, "tx": -112.98165130615234, "ty": 129.40646362304688, "tz": 953.4816284179688 }, "23": { "roll": 32.98301833203169, "pitch": 9.566943298783873, "yaw": -133.77616537217574, "tx": -175.1977081298828, "ty": 129.72354125976562, "tz": 941.9784545898438 }, "24": { "roll": 31.56733256853796, "pitch": 11.258466989435535, "yaw": -94.38243545748634, "tx": -222.58428955078125, "ty": 111.0603256225586, "tz": 938.3611450195312 }, "25": { "roll": -0.09104102790886756, "pitch": 0.9547259576978515, "yaw": -9.273749722181268, "tx": -164.71466064453125, "ty": 58.147789001464844, "tz": 586.7769775390625 }, "26": { "roll": 0.3701895813452506, "pitch": 1.0597945848959984, "yaw": 10.115909050219253, "tx": -184.7316131591797, "ty": 81.68688201904297, "tz": 786.6896362304688 }, "27": { "roll": 0.590561873674073, "pitch": 0.995913473352586, "yaw": 33.81169172454919, "tx": -189.5132293701172, "ty": 133.80844116210938, "tz": 1048.3184814453125 } };
-        function changeCamera(id) {
+        var imageParams = { "19": { "roll": 34.67691272193779, "pitch": 1.1589903108202395, "yaw": -36.30760802117431, "tx": -13.697570792028824, "ty": -78.63572715166765, "tz": 842.1721085043747 }, "20": { "roll": 26.982524730161366, "pitch": 0.29591304319538986, "yaw": -88.99786737647823, "tx": 27.971130859862047, "ty": -102.5245356729985, "tz": 896.1674402055827 }, "21": { "roll": 27.576185166821325, "pitch": 1.5068577931178275, "yaw": -140.86380506167475, "tx": 52.8727604248037, "ty": -51.50260137437839, "tz": 894.7396825718193 }, "22": { "roll": 25.561136715171173, "pitch": 1.2426373370327843, "yaw": 174.86301703379036, "tx": 41.81317972722939, "ty": -7.195969536787996, "tz": 899.707608383953 }, "23": { "roll": 25.822005494879214, "pitch": -0.033008272634219196, "yaw": 128.58292596300353, "tx": -21.623610819270123, "ty": -5.941798763803036, "tz": 902.3944078948878 }, "24": { "roll": 24.438895942544082, "pitch": 1.103895389989949, "yaw": 89.31679607555127, "tx": -69.00803866302999, "ty": -24.19057045984639, "tz": 904.6958501237726 }, "25": { "roll": 4.077052937789824, "pitch": 1.0548442840690204, "yaw": 9.410205567165821, "tx": -68.84155614652248, "ty": -26.037474296473338, "tz": 564.9426243753492 }, "26": { "roll": 3.2738541059495803, "pitch": 2.0271167556600553, "yaw": -10.006757811048034, "tx": -56.34736081474593, "ty": -31.10837966014372, "tz": 755.5470029481719 }, "27": { "roll": 4.796809967811229, "pitch": -0.4143031153957637, "yaw": -33.7591146628723, "tx": -18.669458616618275, "ty": -16.162446032226278, "tz": 1009.2212670416077 } };
+        function changeCamera(id, rerender) {
             var new_param = imageParams[id];
             console.log(new_param);
-            camera.rotation.x = new_param.pitch * Math.pi / 180.0;
-            camera.rotation.y = new_param.roll * Math.pi / 180.0;
-            camera.rotation.z = new_param.yaw * Math.pi / 180.0;
+            camera.rotation.x = new_param.pitch * Math.PI / 180.0;
+            camera.rotation.y = new_param.roll * Math.PI / 180.0;
+            camera.rotation.z = -new_param.yaw * Math.PI / 180.0;
 
             camera.position.z = new_param.tz;
-            camera.position.y = new_param.ty;
-            camera.position.x = new_param.tx;
+            camera.position.y = new_param.tx;
+            camera.position.x = -new_param.ty;
             renderer.render(scene, camera);
         };
         var scene = new THREE.Scene();
-        var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-        var roll = 0.57566;
-        var pitch = 0.16697;
-        var yaw = 2.33483;
+        var camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 4000);
 
         camera.eulerOrder = 'ZXY';
-        camera.rotation.x = pitch;
-        camera.rotation.y = roll;
-        camera.rotation.z = -yaw;
-
-        camera.position.z = 713;
-        camera.position.y = 98;
-        camera.position.x = -133;
 
 
         var renderer = new THREE.WebGLRenderer();
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(window.innerWidth, window.innerHeight - 20);
         document.body.appendChild(renderer.domElement);
 
 
@@ -77,9 +67,10 @@
         // plane.overdraw = true;
 
         scene.add(plane);
-        
-        window.addEventListener('load', function(){
-            renderer.render(scene, camera);
+        plane.position.set(0, 0, 0);
+        window.addEventListener('load', function () {
+            changeCamera("24")
+            // renderer.render(scene, camera);
         })
     </script>
 </body>
