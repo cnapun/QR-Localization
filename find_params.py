@@ -60,12 +60,17 @@ def match_center_order(centers1, to_rearrange, pattern, scene):
     return perms[np.argmin(errs)], affs[np.argmin(errs)]
 
 
-def calc_params(pattern_centers, centers2, mtx):
+def calc_params(pattern_centers, centers2, mtx, use_cal_cam=True, img_shape=None):
     pcs = np.hstack((pattern_centers, np.zeros((4, 1))))
     _, rvec, tvec = cv2.solvePnP(pcs.astype(np.float32), centers2.astype(
         np.float32), mtx.astype(np.float32), None)
-    rot = cv2.Rodrigues(rvec.astype(np.float32))[0]
-    euler_vec = cv2.RQDecomp3x3(rot.T.astype(np.float32))[0]
+    if not use_cal_cam:
+        rot = cv2.Rodrigues(rvec.astype(np.float32))[0]
+        euler_vec = cv2.RQDecomp3x3(rot.T.astype(np.float32))[0]
+    else:
+        rvec = cv2.calibrateCamera([pcs.astype(np.float32)], [centers2.astype(np.float32)], img_shape, None,None)[3][0]
+        rot = cv2.Rodrigues(rvec.astype(np.float32))[0]
+        euler_vec = cv2.RQDecomp3x3(rot.T.astype(np.float32))[0]
     return euler_vec, tvec
 
 
@@ -109,7 +114,7 @@ def main(input_file, pattern_file='Camera Localization/pattern.png'):
 
     centers, _ = match_center_order(pattern_centers, img_centers, pattern, img)
     euler_vec, tvec = calc_params(
-        pattern_centers / pattern_size * print_size, centers, mtx)
+        pattern_centers / pattern_size * print_size, centers, mtx, True, imshape[::-1])
     roll, pitch, yaw = euler_vec
     yaw = -yaw
 
